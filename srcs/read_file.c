@@ -1,23 +1,21 @@
 #include "fdf.h"
 
-int				handle_err(int fd, t_list **line_lst, char **line)
+static int		handle_err(t_list **line_lst, char **line)
 {
-	close(fd);
 	ft_lstdel(line_lst, &del_lst_content);
 	ft_memdel((void **)line);
 	return (READ_FILE_ERROR);
 }
 
-static int		check_line(char *line)
+static size_t	check_line(char *line)
 {
-	int		width;
-	int		color;
+	int			color;
+	size_t		width;
 
 	width = 0;
 	while (*line != '\0')
 	{
-		while (*line != '\0' && *line == ' ')
-			line++;
+		line = (*line == '-') ? (line + 1) : line;
 		if (!ft_isdigit(*line))
 			return (READ_FILE_ERROR);
 		while (*line != '\0' && ft_isdigit(*line))
@@ -31,6 +29,8 @@ static int		check_line(char *line)
 			while (ft_ishexdigit(*line))
 				line++;
 		}
+		while (*line != '\0' && *line == ' ')
+			line++;
 		width++;
 	}
 	return ((width >= 2) ? width : READ_FILE_ERROR);
@@ -45,28 +45,38 @@ static void		add_line(t_list **line_lst, char **line)
 	ft_memdel((void **)line);
 }
 
-int				read_file(char *filename, t_list **line_lst)
+static char		*trim_line(char **line)
 {
-	int		fd;
-	int		res;
-	int		w_preset;
-	char	*line;
+	char	*trim;
 
-	fd = open(filename, O_RDONLY);
-	if (fd == -1)
-		return (READ_FILE_FAIL);
+	trim = ft_strtrim(*line);
+	ft_memdel((void **)line);
+	return (trim);
+}
+
+int				read_file(int fd, t_list **line_lst, size_t *width)
+{
+	int		res;
+	char	*line;
+	size_t	height;
+
 	if ((res = gnl(fd, &line)) == GNL_ERROR)
 		return (READ_FILE_ERROR);
-	if ((w_preset = check_line(line)) == READ_FILE_ERROR)
-		return (handle_err(fd, NULL, &line));
+	line = trim_line(&line);
+	if ((*width = check_line(line)) == READ_FILE_ERROR)
+		return (handle_err(NULL, &line));
 	add_line(line_lst, &line);
-	while ((res = gnl(fd, &line)) != GNL_READ_COMPLETE)
+	height = 1;
+	while ((res = gnl(fd, &line)) != GNL_READ_COMPLETE && height++)
 	{
-		if (res == GNL_ERROR || check_line(line) != w_preset)
-			return (handle_err(fd, line_lst, &line));
+		line = trim_line(&line);
+		if (res == GNL_ERROR || check_line(line) != *width)
+			return (handle_err(line_lst, &line));
 		add_line(line_lst, &line);
 	}
+	if (height < 2)
+		return (handle_err(line_lst, NULL));
 	ft_lstrev(line_lst);
-	close(fd);
+	*width = *width - 1;
 	return (READ_FILE_SUCCESS);
 }
