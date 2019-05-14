@@ -13,6 +13,10 @@
 
 void			del_lst_content(void *content, size_t content_size);
 
-int				read_file(int fd, t_list **line_lst, size_t *width);
+char			*to_next_point(char *row);
+
+int				read_file(int fd, t_list **line_lst, int *width, int *height);
+
+t_polygon		*make_polygons(t_list *line_lst, int width, int height);
 
 #endif

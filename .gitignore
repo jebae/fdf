@@ -8,3 +8,4 @@ dumbmain.c
 *.out.*
 *.fdf
 maps
+graphics

@@ -7,10 +7,10 @@ static int		handle_err(t_list **line_lst, char **line)
 	return (READ_FILE_ERROR);
 }
 
-static size_t	check_line(char *line)
+static int		check_line(char *line)
 {
 	int			color;
-	size_t		width;
+	int			width;
 
 	width = 0;
 	while (*line != '\0')
@@ -23,7 +23,7 @@ static size_t	check_line(char *line)
 		if (*line == ',' && line++)
 		{
 			color = ft_hexatoi(line);
-			if (color < 0 || color > 255)
+			if (color < 0 || color > 0xFFFFFF)
 				return (READ_FILE_ERROR);
 			line += 2;
 			while (ft_ishexdigit(*line))
@@ -54,29 +54,31 @@ static char		*trim_line(char **line)
 	return (trim);
 }
 
-int				read_file(int fd, t_list **line_lst, size_t *width)
+int				read_file(int fd, t_list **line_lst, int *width, int *height)
 {
 	int		res;
 	char	*line;
-	size_t	height;
 
 	if ((res = gnl(fd, &line)) == GNL_ERROR)
 		return (READ_FILE_ERROR);
 	line = trim_line(&line);
-	if ((*width = check_line(line)) == READ_FILE_ERROR)
+	*width = check_line(line);
+	if (*width == READ_FILE_ERROR)
 		return (handle_err(NULL, &line));
 	add_line(line_lst, &line);
-	height = 1;
-	while ((res = gnl(fd, &line)) != GNL_READ_COMPLETE && height++)
+	*height = 1;
+	while ((res = gnl(fd, &line)) != GNL_READ_COMPLETE)
 	{
 		line = trim_line(&line);
 		if (res == GNL_ERROR || check_line(line) != *width)
 			return (handle_err(line_lst, &line));
 		add_line(line_lst, &line);
+		(*height)++;
 	}
-	if (height < 2)
+	if (*height < 2)
 		return (handle_err(line_lst, NULL));
 	ft_lstrev(line_lst);
 	*width = *width - 1;
+	*height = *height - 1;
 	return (READ_FILE_SUCCESS);
 }
