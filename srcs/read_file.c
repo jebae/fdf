@@ -77,7 +77,6 @@ int				read_file(int fd, t_list **line_lst, int *width, int *height)
 	}
 	if (*height < 2)
 		return (handle_err(line_lst, NULL));
-	ft_lstrev(line_lst);
 	*width = *width - 1;
 	*height = *height - 1;
 	return (READ_FILE_SUCCESS);
