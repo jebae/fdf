@@ -1,11 +1,10 @@
 #include "fdf.h"
 
-static float	get_scale_ratio(t_polygon *polygons, int polygon_size, \
-t_mat4 *camera_mat)
+static float	get_scale_ratio(t_polygon *polygons, int polygon_size,\
+		t_mat4 *camera_mat, t_vec4 (*projection)(t_vec4 *vertex))
 {
 	int			i;
 	int			j;
-	float		ratio;
 	float		maxs[2];
 	t_vec4		vertex;
 
@@ -18,6 +17,7 @@ t_mat4 *camera_mat)
 		while (j < 4)
 		{
 			vertex = mat_mul_vec(camera_mat, &(polygons[i].vertices[j]));
+			vertex = projection(&vertex);
 			if (ABS(vertex.arr[0]) > maxs[0])
 				maxs[0] = ABS(vertex.arr[0]);
 			if (ABS(vertex.arr[1]) > maxs[1])
@@ -26,6 +26,7 @@ t_mat4 *camera_mat)
 		}
 		i++;
 	}
+	printf(KRED "max : (%.2f, %.2f)\n" KNRM, maxs[0], maxs[1]);
 	return (X_RATIO(maxs[0]) > Y_RATIO(maxs[1]) ?\
 		Y_RATIO(maxs[1]) : X_RATIO(maxs[0]));
 }
@@ -40,17 +41,33 @@ float			default_z(float width, float height)
 	return (sqrt(pow(d, 2) - pow(a, 2)));
 }
 
-t_camera		init_camera_pos(t_polygon *polygons, t_vec4 *focus,\
-	float width, float height)
+t_camera		init_camera(t_polygon *polygons, float width, float height,\
+		t_marker *marker)
 {
 	t_camera 	cam;
 	t_mat4 		mat;
 
 	cam.zoom = 1;
-	cam.focus = *focus;
+	cam.focus = (t_vec4){width / 2, height / 2, 0, 1};
 	cam.pos = (t_vec4){width, 0, default_z(width, height), 1};
 	mat = camera_mat(&cam);
 	cam.zoom = get_scale_ratio(polygons, (int)(width * height),\
-		&mat);
+		&mat, marker->projection);
+	cam.roll = 0;
+	return (cam);
+}
+
+t_camera		init_iso_camera(t_polygon *polygons, float width, float height)
+{
+	t_camera 	cam;
+	t_mat4 		mat;
+
+	cam.zoom = 1;
+	cam.focus = (t_vec4){width / 2, height / 2, 0, 1};
+	cam.pos = (t_vec4){1 + cam.focus.arr[0], 1 + cam.focus.arr[1], 1, 1};
+	mat = camera_mat(&cam);
+	cam.zoom = get_scale_ratio(polygons, (int)(width * height),\
+		&mat, parallel_projection);
+	cam.roll = 0;
 	return (cam);
 }

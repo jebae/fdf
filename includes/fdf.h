@@ -34,10 +34,15 @@ int				read_file(int fd, t_list **line_lst, int *width, int *height);
 
 t_polygon		*make_polygons(t_list *line_lst, int width, int height);
 
-t_camera		init_camera_pos(t_polygon *polygons, t_vec4 *focus,\
-	float width, float height);
+t_camera		init_camera(t_polygon *polygons, float width, float height,\
+		t_marker *marker);
 
 void			init_display(t_polygon *polygons, float width, float height,\
 		t_marker *marker);
+
+void			iso_display(t_polygon *polygons, float width, float height,\
+		t_marker *marker);
+
+t_camera		init_iso_camera(t_polygon *polygons, float width, float height);
 
 #endif
