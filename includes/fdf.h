@@ -22,7 +22,8 @@
 typedef struct		s_fdf
 {
 	int				fd;
-	t_marker		*marker;
+	void			*p_mlx;
+	void			*p_win;
 	t_polygon		*polygons;
 }					t_fdf;
 

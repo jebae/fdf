@@ -9,7 +9,7 @@ void			init_display(t_polygon *polygons, float width, float height,\
 
 	cam = init_camera(polygons, width, height, marker);
 	mat = camera_mat(&cam);
-	display(polygons, (int)(width * height), &mat, marker);
+	display(polygons, (int)(width * height * 2), &mat, marker);
 }
 
 void			iso_display(t_polygon *polygons, float width, float height,\
@@ -21,5 +21,5 @@ void			iso_display(t_polygon *polygons, float width, float height,\
 
 	cam = init_iso_camera(polygons, width, height);
 	mat = camera_mat(&cam);
-	display(polygons, (int)(width * height), &mat, marker);
+	display(polygons, (int)(width * height * 2), &mat, marker);
 }
