@@ -25,25 +25,35 @@ typedef struct		s_fdf
 	void			*p_mlx;
 	void			*p_win;
 	t_polygon		*polygons;
+	size_t			polygon_count;
 }					t_fdf;
 
+/*
+ * utils
+*/
 void			del_lst_content(void *content, size_t content_size);
-
 char			*to_next_point(char *row);
 
+/*
+ * preprocess
+*/
 int				read_file(int fd, t_list **line_lst, int *width, int *height);
-
 t_polygon		*make_polygons(t_list *line_lst, int width, int height);
 
+/*
+ * after process
+*/
+void			destroy_polygons(t_polygon **polygons, size_t polygon_count);
+
+/*
+ * initial display
+*/
 t_camera		init_camera(t_polygon *polygons, float width, float height,\
 		t_marker *marker);
-
 void			init_display(t_polygon *polygons, float width, float height,\
 		t_marker *marker);
-
 void			iso_display(t_polygon *polygons, float width, float height,\
 		t_marker *marker);
-
 t_camera		init_iso_camera(t_polygon *polygons, float width, float height);
 
 #endif

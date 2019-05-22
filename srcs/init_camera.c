@@ -14,7 +14,7 @@ static float	get_scale_ratio(t_polygon *polygons, int polygon_size,\
 	while (i < polygon_size)
 	{
 		j = 0;
-		while (j < 4)
+		while (j < polygons[i].v_count)
 		{
 			vertex = mat_mul_vec(camera_mat, &(polygons[i].vertices[j]));
 			vertex = projection(&vertex);
@@ -49,10 +49,11 @@ t_camera		init_camera(t_polygon *polygons, float width, float height,\
 
 	cam.zoom = 1;
 	cam.focus = (t_vec4){width / 2, height / 2, 0, 1};
-	cam.pos = (t_vec4){width, 0, default_z(width, height), 1};
+	cam.pos = (t_vec4){width / 2, 0, default_z(width, height), 1};
 	mat = camera_mat(&cam);
-	cam.zoom = get_scale_ratio(polygons, (int)(width * height),\
+	cam.zoom = get_scale_ratio(polygons, (int)(width * height * 2),\
 		&mat, marker->projection);
+	printf(KYEL "camera zoom : %.10f\n" KNRM, cam.zoom);
 	cam.roll = 0;
 	return (cam);
 }
@@ -66,7 +67,7 @@ t_camera		init_iso_camera(t_polygon *polygons, float width, float height)
 	cam.focus = (t_vec4){width / 2, height / 2, 0, 1};
 	cam.pos = (t_vec4){1 + cam.focus.arr[0], 1 + cam.focus.arr[1], 1, 1};
 	mat = camera_mat(&cam);
-	cam.zoom = get_scale_ratio(polygons, (int)(width * height),\
+	cam.zoom = get_scale_ratio(polygons, (int)(width * height * 2),\
 		&mat, parallel_projection);
 	cam.roll = 0;
 	return (cam);
