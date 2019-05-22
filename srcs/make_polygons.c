@@ -56,6 +56,8 @@ static t_polygon	*init_polygons(int width, int height)
 	{
 		polygons[size].v_count = 3;
 		polygons[size].vertices = ft_memalloc(sizeof(t_vec4) * 3);
+		polygons[size].line_color = 0xFFFFFF;
+		polygons[size].fill_color = 0x000000;
 	}
 	return (polygons);
 }

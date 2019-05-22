@@ -49,7 +49,7 @@ t_camera		init_camera(t_polygon *polygons, float width, float height,\
 
 	cam.zoom = 1;
 	cam.focus = (t_vec4){width / 2, height / 2, 0, 1};
-	cam.pos = (t_vec4){width / 2, 0, default_z(width, height), 1};
+	cam.pos = (t_vec4){width, 0, default_z(width, height), 1};
 	mat = camera_mat(&cam);
 	cam.zoom = get_scale_ratio(polygons, (int)(width * height * 2),\
 		&mat, marker->projection);
