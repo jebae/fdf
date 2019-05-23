@@ -9,3 +9,5 @@ dumbmain.c
 *.fdf
 maps
 graphics
+.vscode
+fdf

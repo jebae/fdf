@@ -54,8 +54,8 @@ static t_polygon	*init_polygons(int width, int height)
 	polygons = ft_memalloc(sizeof(t_polygon) * size);
 	while (--size >= 0)
 	{
+		polygons[size] = new_polygon(3, );
 		polygons[size].v_count = 3;
-		polygons[size].vertices = ft_memalloc(sizeof(t_vec4) * 3);
 	}
 	return (polygons);
 }
