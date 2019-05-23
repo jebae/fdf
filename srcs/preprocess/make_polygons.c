@@ -53,10 +53,7 @@ static t_polygon	*init_polygons(int width, int height)
 	size = width * height * 2;
 	polygons = ft_memalloc(sizeof(t_polygon) * size);
 	while (--size >= 0)
-	{
-		polygons[size] = new_polygon(3, );
-		polygons[size].v_count = 3;
-	}
+		polygons[size] = new_polygon(3, 0xFFFFFF, 0x000000);
 	return (polygons);
 }
 

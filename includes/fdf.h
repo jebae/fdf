@@ -67,5 +67,6 @@ t_camera		init_iso_camera(t_polygon *polygons, float width, float height);
 int				event_keypress(int keycode, void *param);
 void			key_esc(void *param);
 void			key_right(void *param);
+void			key_left(void *param);
 
 #endif
