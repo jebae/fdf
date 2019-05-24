@@ -30,6 +30,11 @@
 # define KEY_2					19
 # define KEY_3					20
 
+# define RED					0xFF0000
+# define GREEN					0x00FF00
+# define SKYBLUE				0x87CEEB
+# define YELLOW					0xFFFF00
+
 typedef struct		s_fdf
 {
 	int				fd;
@@ -83,5 +88,12 @@ void			key_o(void *param);
 void			key_1(void *param);
 void            key_2(void *param);
 void            key_3(void *param);
+
+/*
+ * board
+*/
+void        	render_board(t_fdf *fdf);
+void         	render_usage(t_fdf *fdf);
+void        	render_status(t_fdf *fdf);
 
 #endif

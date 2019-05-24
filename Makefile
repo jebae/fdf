@@ -9,6 +9,7 @@ SRCS = srcs/*.c\
 	srcs/init/*.c\
 	srcs/preprocess/*.c\
 	srcs/utils/*.c\
+	srcs/board/*.c\
 
 INCLUDES = -I ./includes\
 	-I ./graphics/libft/includes\

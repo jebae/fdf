@@ -4,6 +4,7 @@ void	event_render(t_fdf *fdf)
 {
 	mlx_clear_window(fdf->p_mlx, fdf->p_win);
 	render(fdf->polygons, fdf->polygon_count, &(fdf->cam), &(fdf->marker));
+	render_board(fdf);
 }
 
 int		event_keypress(int keycode, void *param)
