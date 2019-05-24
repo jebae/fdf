@@ -34,7 +34,7 @@ static void			read_row(char *row, t_polygon *upper, t_polygon *lower,\
 	x = 0;
 	while (*row != '\0')
 	{
-		v = (t_vec4){(float)x, (float)y, (float)ft_atoi(row), 1.0f};
+		v = (t_vec4){{(float)x, (float)y, (float)ft_atoi(row), 1.0f}};
 		if (upper != NULL)
 			handle_upper_polygon(&(upper[2 * x]), v, x == 0, x == width);
 		if (lower != NULL)

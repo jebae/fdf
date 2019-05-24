@@ -14,8 +14,8 @@
 # define READ_FILE_FAIL			0
 # define READ_FILE_ERROR		-1
 # define PREPROCESS_SUCCESS		1
-# define X_RATIO(X)				((WIDTH * 0.5f - PADDING) / X)
-# define Y_RATIO(Y)				((HEIGHT * 0.5f - PADDING) / Y)
+# define X_RATIO(X)				((WIDTH * 0.5f - 2 * PADDING) / X)
+# define Y_RATIO(Y)				((HEIGHT * 0.5f - 2 * PADDING) / Y)
 
 # define KEYPRESS				2
 # define KEYPRESSMASK			(1L << 0)
@@ -26,6 +26,9 @@
 # define KEY_RIGHT				124
 # define KEY_I					34
 # define KEY_O					31
+# define KEY_1					18
+# define KEY_2					19
+# define KEY_3					20
 
 typedef struct		s_fdf
 {
@@ -46,11 +49,13 @@ typedef struct		s_fdf
 void			del_lst_content(void *content, size_t content_size);
 char			*to_next_point(char *row);
 void			destroy_polygons(t_polygon **polygons, size_t polygon_count);
+void			rezoom_camera(t_camera *cam, t_polygon *polygons, size_t polygon_count,\
+    t_vec4 (*projection)(t_vec4 *));
 
 /*
  * preprocess
 */
-int				fdf_preprocess(t_fdf *fdf, char *filename, int *width, int *height);
+int				fdf_preprocess(t_fdf *fdf, char *filename);
 int				read_file(int fd, t_list **line_lst, int *width, int *height);
 t_polygon		*make_polygons(t_list *line_lst, int width, int height);
 
@@ -75,5 +80,8 @@ void			key_up(void *param);
 void			key_down(void *param);
 void			key_i(void *param);
 void			key_o(void *param);
+void			key_1(void *param);
+void            key_2(void *param);
+void            key_3(void *param);
 
 #endif

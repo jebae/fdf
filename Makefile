@@ -8,6 +8,7 @@ SRCS = srcs/*.c\
 	srcs/events/*.c\
 	srcs/init/*.c\
 	srcs/preprocess/*.c\
+	srcs/utils/*.c\
 
 INCLUDES = -I ./includes\
 	-I ./graphics/libft/includes\
