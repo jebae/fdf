@@ -24,6 +24,8 @@
 # define KEY_DOWN				125
 # define KEY_LEFT				123
 # define KEY_RIGHT				124
+# define KEY_I					34
+# define KEY_O					31
 
 typedef struct		s_fdf
 {
@@ -65,8 +67,13 @@ t_camera		init_iso_camera(t_polygon *polygons, float width, float height);
  * events
 */
 int				event_keypress(int keycode, void *param);
+void			event_render(t_fdf *fdf);
 void			key_esc(void *param);
 void			key_right(void *param);
 void			key_left(void *param);
+void			key_up(void *param);
+void			key_down(void *param);
+void			key_i(void *param);
+void			key_o(void *param);
 
 #endif
