@@ -28,7 +28,7 @@ FRAMEWORKS = -framework OpenGL\
 all : $(NAME)
 
 $(NAME) : $(LIBS) $(SRCS)
-	$(CC) -D DEBUG $(CFLAGS) $(INCLUDES) $(LIBS) $(FRAMEWORKS) $(SRCS) -o $(NAME)
+	$(CC) $(CFLAGS) $(INCLUDES) $(LIBS) $(FRAMEWORKS) $(SRCS) -o $(NAME)
 
 $(LIBS) :
 	$(MAKE) -C ./graphics/libft all
