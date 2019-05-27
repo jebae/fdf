@@ -1,0 +1,9 @@
+*.out*
+*.sw*
+*.*.sw*
+*.test.*
+dumbmain.c
+*.sh
+*.o
+*.a
+.vscode

@@ -5,9 +5,3 @@
 dumbmain.c
 *.a
 *.out
-*.out.*
-*.fdf
-maps
-.vscode
-fdf
-.dSYM
