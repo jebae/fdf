@@ -39,12 +39,6 @@ void            key_3(void *param)
 
     fdf = (t_fdf *)param;
     parallel_proj_marker(&(fdf->marker));
-    #ifdef DEBUG
-        printf(KRED "cam before : %f\n" KNRM, fdf->cam.zoom);
-    #endif
     fdf->cam = init_camera(fdf->polygons, fdf->width, fdf->height, fdf->marker.projection);
-    #ifdef DEBUG
-        printf(KRED "cam after : %f\n" KNRM, fdf->cam.zoom);
-    #endif
     event_render(fdf);
 }

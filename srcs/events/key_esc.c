@@ -9,6 +9,6 @@ void	key_esc(void *param)
 	if (fdf->fd != -1)
 		close(fdf->fd);
 	destroy_polygons(&(fdf->polygons), fdf->polygon_count);
-	printf(KGRN "Program exit...\n" KNRM);
+	ft_putstr("Program exit...\n");
 	exit(1);
 }

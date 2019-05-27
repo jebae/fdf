@@ -47,16 +47,10 @@ t_camera			init_camera(t_polygon *polygons, float width, float height,\
 	pc = (t_vec4){{1, -1, 1}};
 	pc = normalize(&pc);
 	radius = sphere_radius(polygons, width, height, polygon_count);
-	#ifdef DEBUG
-		printf(KRED "radius : %f\n" KNRM, radius);
-	#endif
 	pc = scalar_mul_vec(radius, &pc);
 	cam.pos = vec_plus_vec(&(cam.focus), &pc);
 	cam.zoom = 1;
 	rezoom_camera(&cam, polygons, polygon_count, projection);
-	#ifdef DEBUG
-		printf(KYEL "camera zoom : %.10f\n" KNRM, cam.zoom);
-	#endif
 	cam.roll = 0;
 	return (cam);
 }

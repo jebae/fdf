@@ -26,9 +26,6 @@ static float	    get_scale_ratio(t_polygon *polygons, size_t polygon_count,\
 		}
 		i++;
 	}
-	#ifdef DEBUG
-		printf(KRED "max : (%.2f, %.2f)\n" KNRM, maxs[0], maxs[1]);
-	#endif
 	return (X_RATIO(maxs[0]) > Y_RATIO(maxs[1]) ?\
 		Y_RATIO(maxs[1]) : X_RATIO(maxs[0]));
 }

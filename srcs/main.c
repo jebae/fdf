@@ -8,7 +8,7 @@ int		main(int argc, char **args)
 		return (0);
 	if (fdf_preprocess(&fdf, args[1]) != PREPROCESS_SUCCESS)
 	{
-		printf(KRED "Preprocess fail\n" KNRM); // change to putstr after
+		ft_putstr("Preprocess fail\n");
 		return (0);
 	}
 	init_mlx(&fdf, WINDOW_NAME);

@@ -1,8 +1,7 @@
 #ifndef FDF_H
 # define FDF_H
 # include <fcntl.h>
-#include <stdio.h> // remove after
-# include "mlx.h"
+# include <mlx.h>
 # include "libft.h"
 # include "get_next_line.h"
 # include "gmath.h"
