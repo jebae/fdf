@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_board.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/28 14:34:20 by jebae             #+#    #+#             */
+/*   Updated: 2019/05/28 14:48:23 by jebae            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
-void                render_board(t_fdf *fdf)
+void	render_board(t_fdf *fdf)
 {
-    render_usage(fdf);
-    render_status(fdf);
+	render_usage(fdf);
+	render_status(fdf);
 }

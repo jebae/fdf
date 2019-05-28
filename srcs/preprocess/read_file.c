@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_file.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/28 14:35:13 by jebae             #+#    #+#             */
+/*   Updated: 2019/05/28 14:35:14 by jebae            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 static int		handle_err(t_list **line_lst, char **line)
@@ -59,7 +71,7 @@ int				read_file(int fd, t_list **line_lst, int *width, int *height)
 	int		res;
 	char	*line;
 
-	if ((res = gnl(fd, &line)) == GNL_ERROR)
+	if ((res = GNL(fd, &line)) == GNL_ERROR)
 		return (READ_FILE_ERROR);
 	line = trim_line(&line);
 	*width = check_line(line);
@@ -67,7 +79,7 @@ int				read_file(int fd, t_list **line_lst, int *width, int *height)
 		return (handle_err(NULL, &line));
 	add_line(line_lst, &line);
 	*height = 1;
-	while ((res = gnl(fd, &line)) != GNL_READ_COMPLETE)
+	while ((res = GNL(fd, &line)) != GNL_READ_COMPLETE)
 	{
 		line = trim_line(&line);
 		if (res == GNL_ERROR || check_line(line) != *width)

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/28 14:34:08 by jebae             #+#    #+#             */
+/*   Updated: 2019/05/28 14:34:09 by jebae            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FDF_H
 # define FDF_H
 # include <fcntl.h>
@@ -8,7 +20,7 @@
 # include "draw.h"
 
 # define WINDOW_NAME			"fdf"
-# define gnl					get_next_line
+# define GNL					get_next_line
 # define READ_FILE_SUCCESS		1
 # define READ_FILE_FAIL			0
 # define READ_FILE_ERROR		-1
@@ -34,7 +46,7 @@
 # define SKYBLUE				0x87CEEB
 # define YELLOW					0xFFFF00
 
-typedef struct		s_fdf
+typedef struct	s_fdf
 {
 	int				fd;
 	int				width;
@@ -45,27 +57,30 @@ typedef struct		s_fdf
 	size_t			polygon_count;
 	t_camera		cam;
 	t_marker		marker;
-}					t_fdf;
+}				t_fdf;
 
 /*
- * utils
+** utils
 */
+
 void			del_lst_content(void *content, size_t content_size);
 char			*to_next_point(char *row);
 void			destroy_polygons(t_polygon **polygons, size_t polygon_count);
-void			rezoom_camera(t_camera *cam, t_polygon *polygons, size_t polygon_count,\
-    t_vec4 (*projection)(t_vec4 *));
+void			rezoom_camera(t_camera *cam, t_polygon *polygons,\
+	size_t polygon_count, t_vec4 (*projection)(t_vec4 *));
 
 /*
- * preprocess
+** preprocess
 */
+
 int				fdf_preprocess(t_fdf *fdf, char *filename);
 int				read_file(int fd, t_list **line_lst, int *width, int *height);
 t_polygon		*make_polygons(t_list *line_lst, int width, int height);
 
 /*
- * init
+** init
 */
+
 void			init_mlx(t_fdf *fdf, char *window_name);
 void			init_marker(t_marker *marker, void *p_mlx, void *p_win);
 t_camera		init_camera(t_polygon *polygons, float width, float height,\
@@ -73,8 +88,9 @@ t_camera		init_camera(t_polygon *polygons, float width, float height,\
 t_camera		init_iso_camera(t_polygon *polygons, float width, float height);
 
 /*
- * events
+** events
 */
+
 int				event_keypress(int keycode, void *param);
 void			event_render(t_fdf *fdf);
 void			key_esc(void *param);
@@ -85,14 +101,15 @@ void			key_down(void *param);
 void			key_i(void *param);
 void			key_o(void *param);
 void			key_1(void *param);
-void            key_2(void *param);
-void            key_3(void *param);
+void			key_2(void *param);
+void			key_3(void *param);
 
 /*
- * board
+** board
 */
-void        	render_board(t_fdf *fdf);
-void         	render_usage(t_fdf *fdf);
-void        	render_status(t_fdf *fdf);
+
+void			render_board(t_fdf *fdf);
+void			render_usage(t_fdf *fdf);
+void			render_status(t_fdf *fdf);
 
 #endif

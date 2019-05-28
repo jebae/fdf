@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   camera_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/28 14:35:17 by jebae             #+#    #+#             */
+/*   Updated: 2019/05/28 14:35:18 by jebae            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
-static float	    get_scale_ratio(t_polygon *polygons, size_t polygon_count,\
+static float		get_scale_ratio(t_polygon *polygons, size_t polygon_count,\
 		t_mat4 *camera_mat, t_vec4 (*projection)(t_vec4 *vertex))
 {
 	size_t		i;
@@ -30,13 +42,13 @@ static float	    get_scale_ratio(t_polygon *polygons, size_t polygon_count,\
 		Y_RATIO(maxs[1]) : X_RATIO(maxs[0]));
 }
 
-void			    rezoom_camera(t_camera *cam, t_polygon *polygons, size_t polygon_count,\
-    t_vec4 (*projection)(t_vec4 *))
+void				rezoom_camera(t_camera *cam, t_polygon *polygons,\
+	size_t polygon_count, t_vec4 (*projection)(t_vec4 *))
 {
-    t_mat4      mat;
-    float       scale;
+	t_mat4		mat;
+	float		scale;
 
-    mat = camera_mat(cam);
-    scale = get_scale_ratio(polygons, polygon_count, &mat, projection);
+	mat = camera_mat(cam);
+	scale = get_scale_ratio(polygons, polygon_count, &mat, projection);
 	cam->zoom *= scale;
 }
