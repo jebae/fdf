@@ -20,7 +20,7 @@ OBJS = plot_line.o\
 	z_buffer.o\
 
 LIBS = ../libft/libft.a\
-	../gmath/libgmath.a\
+	   ../gmath/libgmath.a\
 
 all : $(NAME)
 

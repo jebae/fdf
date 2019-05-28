@@ -95,7 +95,7 @@ $(NAME) : $(OBJS)
 	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)
 
-$(OBJS) : $(SRCS)
+$(OBJS) :
 	$(CC) $(CFLAGS) -c $(SRCS) -I $(INCLUDES)
 
 clean :

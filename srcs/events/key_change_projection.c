@@ -12,11 +12,7 @@
 
 #include "fdf.h"
 
-/*
-** parallel
-*/
-
-void			key_1(void *param)
+void		key_1(void *param)
 {
 	t_fdf		*fdf;
 
@@ -29,11 +25,7 @@ void			key_1(void *param)
 	event_render(fdf);
 }
 
-/*
-** perspective
-*/
-
-void			key_2(void *param)
+void		key_2(void *param)
 {
 	t_fdf		*fdf;
 
@@ -46,11 +38,7 @@ void			key_2(void *param)
 	event_render(fdf);
 }
 
-/*
-** iso
-*/
-
-void			key_3(void *param)
+void		key_3(void *param)
 {
 	t_fdf		*fdf;
 
